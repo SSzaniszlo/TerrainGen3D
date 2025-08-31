@@ -65,7 +65,7 @@ void TerrainGen3D::processInput(float deltaTime) {
     }
 
     if (keyState[SDL_SCANCODE_W]) {
-        renderer3D.camPos.z -= deltaTime * 10;
+        renderer3D.camPos.z += deltaTime * 20;
     }
 
     if (keyState[SDL_SCANCODE_A]) {
@@ -77,7 +77,7 @@ void TerrainGen3D::processInput(float deltaTime) {
     }
 
     if (keyState[SDL_SCANCODE_S]) {
-        renderer3D.camPos.z += deltaTime * 20;
+        renderer3D.camPos.z -= deltaTime * 20;
     }
 
     if (keyState[SDL_SCANCODE_Q]) {
@@ -86,6 +86,10 @@ void TerrainGen3D::processInput(float deltaTime) {
 
     if (keyState[SDL_SCANCODE_Z]) {
         renderer3D.camPos.y += deltaTime * 20;
+    }
+
+    if (keyState[SDL_SCANCODE_SPACE]) {
+        terrainMesh = createTerrainMesh();
     }
 
     //std::cout << "CamPos X: " << renderer3D.camPos.x << " Y: " << renderer3D.camPos.y << " Z: " << renderer3D.camPos.z << std::endl;
@@ -116,7 +120,7 @@ mesh TerrainGen3D::createTerrainMesh() {
     }
     
     //Multiple of 2
-    int divideFactor = 16;
+    int divideFactor = 32;
     int count = 0;
 
 
@@ -140,16 +144,12 @@ mesh TerrainGen3D::createTerrainMesh() {
                 }
                 */
 
-                std::cout << tri0.points[0].y << " " << tri0.points[1].y << " " << tri0.points[2].y << std::endl;
-                std::cout << tri1.points[0].y << " " << tri1.points[1].y << " " << tri1.points[2].y << std::endl;
-
+            
                 result.tris.emplace_back(tri0);
                 result.tris.emplace_back(tri1);
             
                 
             }
-
-            std::cout << count << std::endl;
             count++;
         }
     }
